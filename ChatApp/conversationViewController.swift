@@ -13,7 +13,8 @@ var otherName = ""
 var otherProfileName = ""
 
 class conversationViewController: UIViewController, UIScrollViewDelegate, UITextViewDelegate {
-
+    
+    // variables binded to view elements
     @IBOutlet weak var resultsScrollView: UIScrollView!
     @IBOutlet weak var frameMessageView: UIView!
     @IBOutlet weak var lineLabel: UILabel!
@@ -47,14 +48,15 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
     var blockBtn = UIBarButtonItem()
     var reportBtn = UIBarButtonItem()
     
+    // function that it is called after the view has been loaded
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
+        // Variables that store the main frame width and height
         let width = view.frame.size.width
         let height = view.frame.size.height
         
+        // UI elements positioning
         resultsScrollView.frame = CGRectMake(0, 64, width, height-114)
         resultsScrollView.layer.zPosition = 20
         frameMessageView.frame = CGRectMake(0, resultsScrollView.frame.maxY, width, 50)
@@ -65,6 +67,7 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
         scrollViewOriginalY = self.resultsScrollView.frame.origin.y
         frameMessageOriginalY = self.frameMessageView.frame.origin.y
         
+        // Initializing values on UI elements
         self.title = otherProfileName
         
         messageLabel.text = "Type a message"
@@ -90,14 +93,17 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
         self.navigationItem.rightBarButtonItems = buttonArray as [AnyObject]
     }
     
+    // Function that calls to an auxiliary funciton that retrieves messages from Parse
     func getMessageFromParse(){
         refreshResults()
     }
     
+    // Function that is called when user taps in the view
     func didTapScrollView(){
         self.view.endEditing(true)
     }
     
+    // Function that is called when new text is added
     func textViewDidChange(textView: UITextView) {
         
         if (!messageTextView.hasText()){
@@ -107,12 +113,14 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
         }
     }
 
+    // Function that is called when the text area editing ends
     func textViewDidEndEditing(textView: UITextView) {
         if(!messageTextView.hasText()){
             self.messageLabel.hidden = false
         }
     }
     
+    // Function that is called when the keyboard is displayed
     func keyboardWasShown(notification:NSNotification){
         
         let dict:NSDictionary = notification.userInfo!
@@ -132,6 +140,7 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
         
     }
     
+    // Function that is called when the keyboard hides
     func keyboardWillHide(notification:NSNotification){
         let dict:NSDictionary = notification.userInfo!
         let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
@@ -150,12 +159,7 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
         
     }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    // Function that gets called when the view appears
     override func viewDidAppear(animated: Bool) {
         
         var checkQuery = PFQuery(className: "Block")
@@ -217,6 +221,7 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
         }
     }
     
+    // function that retrieves the messages from Parse
     func refreshResults() {
         
         let theWidth = view.frame.size.width
@@ -351,7 +356,7 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
     }
 
     
-    
+    // Function that uploads a message to Parse
     @IBAction func sendMessage(sender: AnyObject) {
         
         if(self.isBlocked == true){
@@ -399,6 +404,7 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
         }
     }
     
+    // Function that updates a user state to blocked
     func blockUser() {
         
         if (blockBtn.title == "Block"){
@@ -424,6 +430,7 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
         }
     }
     
+    // Function that creates a new report in Parse
     func reportUser(){
         
         var addReport = PFObject(className: "Report")
@@ -434,6 +441,7 @@ class conversationViewController: UIViewController, UIScrollViewDelegate, UIText
     }
     
 
+    // Function to show an alert
     func showAlert(title:String, message:String){
         var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))

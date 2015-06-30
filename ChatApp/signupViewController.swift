@@ -18,7 +18,7 @@ class signupViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var profileTxt: UITextField!
     @IBOutlet weak var signupBtn: UIButton!
     
-    
+    // Function that is called when the view has finished loading
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,12 +39,8 @@ class signupViewController: UIViewController, UINavigationControllerDelegate, UI
         signupBtn.center = CGPointMake(width/2, 410)
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    // Function that get the image from the device's photo library
     @IBAction func addImage(sender: AnyObject) {
         var image = UIImagePickerController()
         image.delegate = self
@@ -54,11 +50,13 @@ class signupViewController: UIViewController, UINavigationControllerDelegate, UI
         
     }
     
+    // Function that is called when the user finishes picking an image from the library
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         profileImg.image = image
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    // Function that closes all open keyboards
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         emailTxt.resignFirstResponder()
         passwordTxt.resignFirstResponder()
@@ -67,10 +65,12 @@ class signupViewController: UIViewController, UINavigationControllerDelegate, UI
         return true
     }
     
+    // Function that is called when the view is touched
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
     
+    // Function that is called when a text field starts being edited
     func textFieldDidBeginEditing(textField: UITextField) {
         let width = view.frame.size.width
         let height = view.frame.size.height
@@ -89,6 +89,7 @@ class signupViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
+    // Function is called when a text field has finished to be edited
     func textFieldDidEndEditing(textField: UITextField) {
         let width = view.frame.size.width
         let height = view.frame.size.height
@@ -107,6 +108,7 @@ class signupViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
+    // Function that registers a new user in Parse
     @IBAction func signUpUser(sender: AnyObject) {
         var user = PFUser()
         user.username = emailTxt.text
@@ -136,7 +138,7 @@ class signupViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
-    
+    // Function that shows an alert to the user
     func showAlert(title:String, message:String){
         var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))

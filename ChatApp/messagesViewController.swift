@@ -31,6 +31,7 @@ class messagesViewController: UIViewController, UITableViewDataSource, UITableVi
     var results = 0
     var currResult = 0
     
+    // Function that is called when the view finishes loading
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,6 +41,7 @@ class messagesViewController: UIViewController, UITableViewDataSource, UITableVi
         resultsTable.frame = CGRectMake(0, 0, width, height-64)
     }
     
+    // Function that is called when the view appears in the screen
     override func viewDidAppear(animated: Bool) {
         self.resultsNameArray.removeAll(keepCapacity: false)
         self.resultsImageFiles.removeAll(keepCapacity: false)
@@ -108,6 +110,7 @@ class messagesViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
 
+    // Function that gets the messages received
     func fetchResults(){
         
         if(currResult < results){
@@ -127,19 +130,17 @@ class messagesViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    // Function that sets the number of rows avaliable in the table view
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultsNameArray.count
     }
     
+    // Function that sets the height of each of the rows in a table view
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60
     }
     
+    // Function that is called when creating the table view
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:messageCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! messageCell
         
@@ -160,6 +161,7 @@ class messagesViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
 
+    // Function that is called when a row is selected in a table
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var cell = tableView.cellForRowAtIndexPath(indexPath) as! messageCell
         

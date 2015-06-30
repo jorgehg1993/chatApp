@@ -39,6 +39,7 @@ class groupConversationViewController: UIViewController, UIScrollViewDelegate, U
     var messageArray = [String]()
     var senderArray = [String]()
     
+    // Function that is called when view finishes loading
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,15 +72,13 @@ class groupConversationViewController: UIViewController, UIScrollViewDelegate, U
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getGroupMessageFunc", name: "getGroupMessage", object: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    // Function that retrieves the messages of a chat group
     func getGroupMessageFunc(){
         refreshResults()
     }
     
+    // Function that is called when the view has appeared in the screen
     override func viewDidAppear(animated: Bool) {
         self.title = groupConversationTitle
         
@@ -103,6 +102,7 @@ class groupConversationViewController: UIViewController, UIScrollViewDelegate, U
         }
     }
     
+    // Function that gets the messages from a chat group
     func refreshResults() {
         
         let theWidth = view.frame.size.width
@@ -259,6 +259,7 @@ class groupConversationViewController: UIViewController, UIScrollViewDelegate, U
         
     }
     
+    // Function that is called when the keyboard is displayed
     func keyboardWasShown(notification:NSNotification){
         
         let dict:NSDictionary = notification.userInfo!
@@ -278,6 +279,7 @@ class groupConversationViewController: UIViewController, UIScrollViewDelegate, U
         
     }
     
+    // Function that is called when the keyboard hides
     func keyboardWillHide(notification:NSNotification){
         let dict:NSDictionary = notification.userInfo!
         let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
@@ -296,10 +298,12 @@ class groupConversationViewController: UIViewController, UIScrollViewDelegate, U
         
     }
 
+    // Function that is called when the user touches the screen
     func didTapScrollView(){
         self.view.endEditing(true)
     }
     
+    // Function that is called when the text in the message text field is changed
     func textViewDidChange(textView: UITextView) {
         
         if (!messageTextView.hasText()){
@@ -309,13 +313,14 @@ class groupConversationViewController: UIViewController, UIScrollViewDelegate, U
         }
     }
     
+    // Function that is called when text in the message text field has finished to be edited
     func textViewDidEndEditing(textView: UITextView) {
         if(!messageTextView.hasText()){
             self.messageLabel.hidden = false
         }
     }
 
-    
+    // Function that creates a new message and stores it in Parse
     @IBAction func sendMessage(sender: AnyObject) {
         
         if(messageTextView.text == ""){

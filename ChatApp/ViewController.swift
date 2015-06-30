@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signupBtn: UIButton!
     @IBOutlet weak var backgroundImg: UIImageView!
     
+    // Function that is called when a view has finished loading
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -34,11 +35,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    // Function that logins a user into the application
     @IBAction func login(sender: AnyObject) {
         
         if(self.emailTxt.text == ""){
@@ -69,6 +66,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
+    // Funciton that closes all keyboards when the return key is pressed
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.emailTxt.resignFirstResponder()
         self.passwordTxt.resignFirstResponder()
@@ -76,14 +74,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // Function that is called when a user touches the screen (besides the keyboard)
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
     
+    // Function that is called when the view appears in the screen
     override func viewWillAppear(animated: Bool) {
         self.navigationItem.hidesBackButton = true
     }
     
+    // Function that shows an alert
     func showAlert(title:String, message:String){
         var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))

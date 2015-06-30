@@ -17,7 +17,7 @@ class groupViewController: UIViewController, UITableViewDataSource, UITableViewD
     var resultsNameArray = Set([""])
     var resultsNameArray2 = [String]()
     
-    
+    // Function that is called when the view finishes loading
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,11 +27,7 @@ class groupViewController: UIViewController, UITableViewDataSource, UITableViewD
         resultsTable.frame = CGRectMake(0, 0, width, height)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    // Function that is called the the view appears in the screen
     override func viewDidAppear(animated: Bool) {
         
         groupConversationTitle = ""
@@ -56,10 +52,12 @@ class groupViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    // Function that sets the number of rows in the table
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultsNameArray2.count
     }
     
+    // Function that is called when creating the table
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:groupCell = tableView.dequeueReusableCellWithIdentifier("groupCell") as! groupCell
         
@@ -68,10 +66,12 @@ class groupViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
 
+    // Function that set the height of a row in the table
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60
     }
     
+    // Function that is called when a row in the table has been selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var cell = tableView.cellForRowAtIndexPath(indexPath) as! groupCell
         
@@ -80,6 +80,7 @@ class groupViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.performSegueWithIdentifier("goToGroupConversation_FromGroupVC", sender: self)
     }
     
+    // Function that creates a new group and stores it in Parse
     @IBAction func addGroup(sender: AnyObject) {
         
         var alert = UIAlertController(title: "New Group", message: "Type the name of the group", preferredStyle: UIAlertControllerStyle.Alert)

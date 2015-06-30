@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("AdQHzfDCtnuHgD00dgwXdNzEvbQqHANvXrMKVVOJ",
             clientKey: "YosEinnKm6CFpX2ngAd7ZGD0kUtqS9kcpiArgsn5")
         
+        // Push Notifications configuration
         let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
         let notificationSettings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
         
